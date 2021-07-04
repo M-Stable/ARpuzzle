@@ -32,7 +32,17 @@ public class FlockManager : MonoBehaviour
             offsets[9] = new Vector3(0.3f, 0.2f, 0);
             offsets[10] = new Vector3(0.1f, -0.3f, 0);
             offsets[11] = new Vector3(0.3f, 0.2f, 0.4f);
-        } else {
+        }
+        else if (pieces.Length == 4) {
+            offsets = new Vector3[4];
+            Debug.Log("Gets flocking for 4");
+
+            offsets[0] = new Vector3(0, 0, 0);
+            offsets[1] = new Vector3(0, -0.1f, -0.35f);
+            offsets[2] = new Vector3(0, 0.3f, 0.15f);
+            offsets[3] = new Vector3(0, -0.25f, -0.25f);
+        }
+        else {
             offsets = new Vector3[1];
             offsets[0] = new Vector3(0, 0, 0);
         }
