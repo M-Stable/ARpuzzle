@@ -69,7 +69,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     {
         droppedPiece = false;
 
-        Debug.Log($"OnGestureStarted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureStarted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
 
         var action = eventData.MixedRealityInputAction.Description;
         if (action == "Hold Action")
@@ -101,7 +101,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     {
         droppedPiece = false;
 
-        Debug.Log($"OnGestureUpdated [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureUpdated [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
 
         var action = eventData.MixedRealityInputAction.Description;
         if (action == "Hold Action")
@@ -117,7 +117,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     {
         droppedPiece = false;
 
-        Debug.Log($"OnGestureUpdated [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureUpdated [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
 
         var action = eventData.MixedRealityInputAction.Description;
         if (action == "Manipulate Action")
@@ -137,7 +137,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     public void OnGestureCompleted(InputEventData eventData)
     {
         droppedPiece = true;
-        Debug.Log($"OnGestureCompleted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureCompleted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
 
         var action = eventData.MixedRealityInputAction.Description;
         if (action == "Hold Action")
@@ -160,7 +160,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     {
         droppedPiece = true;
 
-        Debug.Log($"OnGestureCompleted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureCompleted [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
 
 
         var action = eventData.MixedRealityInputAction.Description;
@@ -184,7 +184,7 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
     */
     public void OnGestureCanceled(InputEventData eventData)
     {
-        Debug.Log($"OnGestureCanceled [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
+        // Debug.Log($"OnGestureCanceled [{Time.frameCount}]: {eventData.MixedRealityInputAction.Description}");
         droppedPiece = false;
 
         var action = eventData.MixedRealityInputAction.Description;
