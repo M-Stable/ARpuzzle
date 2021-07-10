@@ -235,19 +235,20 @@ public class ImageMapper : MonoBehaviour
         {
             GameObject piece = GameObject.Find(i + "," + j);
             Renderer rend = piece.GetComponent<Renderer>();
-            float offsetXToAdd = 0.24f;
+            float offsetXToAdd = 0.47f;
+        float x = 3.5f;
 
         if (i == 1)
         {
             rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.25f);
+            rend.material.mainTextureScale = new Vector2(x, x);
+            rend.material.mainTextureOffset = new Vector2(-0.34f + ((j - 1) * offsetXToAdd), -0.47f);
         }
         else if (i == 2)
         {
             rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.49f);
+            rend.material.mainTextureScale = new Vector2(x, x);
+            rend.material.mainTextureOffset = new Vector2(-0.34f + ((j - 1) * offsetXToAdd), -0.94f);
         }
     }
 
