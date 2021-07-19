@@ -41,10 +41,17 @@ public class HitBoxScript : MonoBehaviour
      */
     private void OnTriggerStay(Collider coll)
     {
+        if (coll.name == "Quad")
+        {
+            return;
+        }
+Debug.Log(gameObject.name + " IS HITTING hitbox" + coll.name + " and " + hasPieceBeenDropped);
+        Debug.Log(Equals("hitbox" + coll.name, gameObject.name));
         isInsideHitbox = true;
         // Checks if the hitbox corresponds to piece and the piece hasn't been dropped
         if ("hitbox" + coll.name == gameObject.name && !hasPieceBeenDropped)
         {
+            
             bool isPieceDropped = coll.gameObject.GetComponent<PositionOnBoard>().droppedPiece;
             coll.gameObject.GetComponent<PositionOnBoard>().yellowHalo.enabled = false;
             coll.gameObject.GetComponent<PositionOnBoard>().greenHalo.enabled = true;

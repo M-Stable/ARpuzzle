@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CurveFollow : MonoBehaviour
 {
+
     [HideInInspector]
     public Transform[] routes;
 
@@ -127,6 +128,11 @@ public class CurveFollow : MonoBehaviour
             else if (flocking)
             {               
                 transform.position = waypointPosition + offset;
+                // transform.LookAt(camera);
+                // transform.RotateAround(camera.position, Vector3.zero, 20 * Time.deltaTime);
+                
+                
+
             }            
             yield return new WaitForEndOfFrame();
         }
