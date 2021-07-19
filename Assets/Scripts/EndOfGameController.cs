@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EndOfGameController : MonoBehaviour
 {
-    public int numPuzzlePieces = 12;
+    public int numPuzzlePieces = 4;
     private int placedPuzzlePieces = 0;
     private float timeSinceFinish = 0;
     private bool played = false;
