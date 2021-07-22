@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /**
  * Maps images on to board and pieces
@@ -12,253 +13,90 @@ public class ImageMapper : MonoBehaviour
     private Renderer boardRend;
     public Vector2 direction = new Vector2(1, 0);
     public float speed = 1.0f;
-    private float largePuzzleScaleX = 1f;
-    private float largePuzzleScaleY = 1f;
-    private float smallPuzzleScaleX = 1.75f;
-    private float smallPuzzleScaleY = 1.75f;
-    private int largePuzzleRows = 5;
-    private int largePuzzleCols = 6;
-    private int smallPuzzleRows = 3;
-    private int smallPuzzleCols = 4;
-    public bool isLargePuzzle = false;
+    private float puzzleScaleX;
+    private float puzzleScaleY;
+    private int rows = 0;
+    private int cols = 0;
+
+    private float offsetXToAdd;
+    private float[] offsetArray;
+    private float vectorOffset;
 
     private Vector2 currentOffset;
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("hello world");
+        // Create a temporary reference to the current scene.
+        Scene currentScene = SceneManager.GetActiveScene();
+        // Retrieve the name of this scene.
+        string sceneName = currentScene.name;
 
-        GameObject piece = GameObject.Find("BoardImage");
-        boardRend = piece.GetComponent<Renderer>();
-        Material copy = boardImage;
-        
-        copy.mainTextureScale = new Vector2(1, 1);
-        boardRend.material = copy;
-
-        if (true)
+        if (sceneName == "4PiecePuzzle")
         {
-            for (int i = 1; i <= 2; i++)
-            {
-                for (int j = 1; j <= 2; j++)
-                {
-                    FourPuzzlePiecesImageMapper(i, j);
-                    //FourPuzzleBoardImageMapper(i, j);
-                }
-            }
+            rows = 2;
+            cols = 2;
+            puzzleScaleX = 3.5f;
+            puzzleScaleY = 3.5f;
+            offsetXToAdd = 0.47f;
+            vectorOffset = -0.34f;
+            offsetArray = new float[] { -0.47f, -0.94f };
 
+            GameObject piece = GameObject.Find("BoardImage");
+            boardRend = piece.GetComponent<Renderer>();
+            Material copy = boardImage;
+
+            copy.mainTextureScale = new Vector2(1, 1);
+            boardRend.material = copy;
+        } else if (sceneName == "SmallPuzzle")
+        {
+            rows = 3;
+            cols = 4;
+            puzzleScaleX = 1.75f;
+            puzzleScaleY = 1.75f;
+            offsetXToAdd = 0.24f;
+            offsetArray = new float[] { -0.25f, -0.49f, -0.73f };
+            vectorOffset = -1.2f;
+        } else
+        {
+            rows = 5;
+            cols = 6;
+            puzzleScaleX = 1f;
+            puzzleScaleY = 1f;
+            offsetXToAdd = 0.14f;
+            offsetArray = new float[] { 0.3f, 0.16f, 0.025f, -0.115f, -0.255f };
+            vectorOffset = -0.68f;
         }
-       else if (isLargePuzzle)
-        {
-            for (int i = 1; i <= largePuzzleRows; i++)
-            {
-                for (int j = 1; j <= largePuzzleCols; j++)
-                {
-                    LargePuzzlePiecesImageMapper(i, j);
-                    LargePuzzleBoardImageMapper(i, j);
-                }
-            }
-            
-        }
-        else
-        {
-            for (int i = 1; i <= smallPuzzleRows; i++)
-            {
-                for (int j = 1; j <= smallPuzzleCols; j++)
-                {
-                    Debug.Log("small is triggered");
-                    SmallPuzzlePiecesImageMapper(i, j);
-                    SmallPuzzleBoardImageMapper(i, j);
-                }
-            }
 
+        for (int i = 1; i <= rows; i++)
+        {
+            for (int j = 1; j <= cols; j++)
+            {
+                puzzlePiecesImageMapper(i, j);
+                if (sceneName != "4PiecePuzzle")
+                {
+                    puzzleBoardImageMapper(i, j);
+                }
+            }
         }
     }
 
-    void LargePuzzlePiecesImageMapper(int i, int j)
+    void puzzlePiecesImageMapper(int i, int j)
     {
         GameObject piece = GameObject.Find(i + "," + j);
         Renderer rend = piece.GetComponent<Renderer>();
-        float offsetXToAdd = 0.14f;
 
-        if (i == 1)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.3f);
-        }
-        else if (i == 2)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.16f);
-        }
-        else if (i == 3)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.025f);
-        }
-        else if (i == 4)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), -0.115f);
-        }
-        else if (i == 5)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), -0.255f);
-        }
-
+        rend.material = pieceImage;
+        rend.material.mainTextureScale = new Vector2(puzzleScaleX, puzzleScaleY);
+        rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
 
-    void LargePuzzleBoardImageMapper(int i, int j)
+    void puzzleBoardImageMapper(int i, int j)
     {
         GameObject board = GameObject.Find("Board" + i + "," + j);
         Renderer rend = board.GetComponent<Renderer>();
-        float offsetXToAdd = 0.14f;
 
-        if (i == 1)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.3f);
-        }
-        else if (i == 2)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.16f);
-        }
-        else if (i == 3)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), 0.025f);
-        }
-        else if (i == 4)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), -0.115f);
-        }
-        else if (i == 5)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(largePuzzleScaleX, largePuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-0.68f + ((j - 1) * offsetXToAdd), -0.255f);
-        }
-
-    }
-
-    void SmallPuzzleBoardImageMapper(int i, int j)
-    {
-        GameObject piece = GameObject.Find("Board" + i + "," + j);
-        Renderer rend = piece.GetComponent<Renderer>();
-        float offsetXToAdd = 0.24f;
-
-        if (i == 1)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.25f);
-        }
-        else if (i == 2)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.49f);
-        }
-        else if (i == 3)
-        {
-            rend.material = boardImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.73f);
-        }
-
-    }
-
-    void SmallPuzzlePiecesImageMapper(int i, int j)
-    {
-        GameObject piece = GameObject.Find(i + "," + j);
-        Renderer rend = piece.GetComponent<Renderer>();
-        float offsetXToAdd = 0.24f;
-
-        if (i == 1)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.25f);
-        }
-        else if (i == 2)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.49f);
-        }
-        else if (i == 3)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(smallPuzzleScaleX, smallPuzzleScaleY);
-            rend.material.mainTextureOffset = new Vector2(-1.2f + ((j - 1) * offsetXToAdd), -0.73f);
-        }
-    }
-
-        float length = 0.4f;
-        void FourPuzzleBoardImageMapper(int i, int j)
-        {
-            GameObject piece = GameObject.Find("Board" + i + "," + j);
-            Renderer rend = piece.GetComponent<Renderer>();
-            float offsetXToAdd = 0.2f;
-
-        Debug.Log(1/pieceImage.mainTexture.texelSize.x);
-        Debug.Log(1/pieceImage.mainTexture.texelSize.y);
-
-
-        if (i == 1)
-            {
-                rend.material = boardImage;
-                rend.material.mainTextureScale = new Vector2(1/pieceImage.mainTexture.texelSize.x/40, 1 / pieceImage.mainTexture.texelSize.x/40);
-                rend.material.mainTextureOffset = new Vector2(0.4f, 0.4f);
-            }
-            else if (i == 2)
-            {
-                rend.material = boardImage;
-                rend.material.mainTextureScale = new Vector2(1, 1);
-                rend.material.mainTextureOffset = new Vector2(0f, 0f);
-            }
-
-        }
-
-        void FourPuzzlePiecesImageMapper(int i, int j)
-        {
-            GameObject piece = GameObject.Find(i + "," + j);
-            Renderer rend = piece.GetComponent<Renderer>();
-            float offsetXToAdd = 0.47f;
-        float x = 3.5f;
-
-        if (i == 1)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(x, x);
-            rend.material.mainTextureOffset = new Vector2(-0.34f + ((j - 1) * offsetXToAdd), -0.47f);
-        }
-        else if (i == 2)
-        {
-            rend.material = pieceImage;
-            rend.material.mainTextureScale = new Vector2(x, x);
-            rend.material.mainTextureOffset = new Vector2(-0.34f + ((j - 1) * offsetXToAdd), -0.94f);
-        }
-    }
-
-    
-
-
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        rend.material = boardImage;
+        rend.material.mainTextureScale = new Vector2(puzzleScaleX, puzzleScaleY);
+        rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
 }
