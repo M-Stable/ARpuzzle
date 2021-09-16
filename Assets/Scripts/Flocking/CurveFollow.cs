@@ -66,6 +66,8 @@ public class CurveFollow : MonoBehaviour
         var r2 = Random.Range(-0.2f, 0.2f);
         var r3 = Random.Range(-0.2f, 0.2f);
 
+        Debug.Log(routes);
+
         Vector3 p0 = routes[routeNumber].GetChild(0).position;
         Vector3 p1 = routes[routeNumber].GetChild(1).position;
         Vector3 p2 = routes[routeNumber].GetChild(2).position;

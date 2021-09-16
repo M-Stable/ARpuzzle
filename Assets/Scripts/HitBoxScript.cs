@@ -41,12 +41,13 @@ public class HitBoxScript : MonoBehaviour
      */
     private void OnTriggerStay(Collider coll)
     {
-        if (coll.name == "Quad")
+        if (coll.name == "Quad" || coll.name == "BoardImage")
         {
             return;
         }
 Debug.Log(gameObject.name + " IS HITTING hitbox" + coll.name + " and " + hasPieceBeenDropped);
         Debug.Log(Equals("hitbox" + coll.name, gameObject.name));
+        Debug.Log("hitbox" + coll.name + ", " + gameObject.name);
         isInsideHitbox = true;
         // Checks if the hitbox corresponds to piece and the piece hasn't been dropped
         if ("hitbox" + coll.name == gameObject.name && !hasPieceBeenDropped)
