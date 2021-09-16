@@ -59,9 +59,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 221a62c798955a843b774aed348ffeb7
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/4PiecePuzzle.unity
     guid: 3be38dcd16067ea4fa467cb37c00b2a1
+  - enabled: 1
+    path: Assets/Scenes/4PieceTabletop.unity
+    guid: 6fa63d36c6281764b83d879a37f9545a
   - enabled: 1
     path: Assets/Scenes/SmallPuzzle.unity
     guid: 24be1f21a06100348bae3251a04e7368
