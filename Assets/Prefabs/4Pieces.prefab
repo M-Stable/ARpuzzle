@@ -209,43 +209,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.011111112, y: 0.013888896, z: -0.65}
   m_Center: {x: 0, y: 0.0013888838, z: -0.33}
---- !u!114 &9133783855867797756
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4150722464315730190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 714c1024dea37a74e84f04af8eec10ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  routes: []
-  speedModifier: 0.05
-  offset: {x: 0, y: 0, z: 0}
-  gestureInteraction: {fileID: 0}
-  rejoining: 0
-  rejoinSpeed: 1
-  rotationSpeed: 1
-  nextR1: {x: 0, y: 0, z: 0}
---- !u!114 &8128351054573037171
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4150722464315730190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  targetTransform: {fileID: 0}
-  handType: 3
-  proximityType: 3
-  constraintOnRotation: -1
-  useLocalSpaceForConstraint: 0
 --- !u!114 &1300963951445906479
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -277,6 +240,18 @@ MonoBehaviour:
   droppedPiece: 0
   isHeld: 0
   pieceInPlace: 0
+--- !u!114 &4865385136586538042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150722464315730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3282ffc1b2ae085448eb74cb2755699c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6146481734015480568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +287,7 @@ MonoBehaviour:
   onHoverExited:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4865385136586538042
+--- !u!114 &8128351054573037171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -321,9 +296,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 4150722464315730190}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3282ffc1b2ae085448eb74cb2755699c, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b3e6359c9750ad4fb8a05c9b8704d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  targetTransform: {fileID: 0}
+  handType: 3
+  proximityType: 3
+  constraintOnRotation: -1
+  useLocalSpaceForConstraint: 0
+--- !u!114 &9133783855867797756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4150722464315730190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 714c1024dea37a74e84f04af8eec10ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  routes: []
+  speedModifier: 0.05
+  offset: {x: 0, y: 0, z: 0}
+  gestureInteraction: {fileID: 0}
+  rejoining: 0
+  rejoinSpeed: 1
+  rotationSpeed: 1
+  nextR1: {x: 0, y: 0, z: 0}
 --- !u!54 &7428924379662106512
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1623,7 +1623,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 232b0ee406173be4b921a03f93004877,
         type: 3}
       propertyPath: m_Name
-      value: '1,1 '
+      value: 1,1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 232b0ee406173be4b921a03f93004877,
         type: 3}

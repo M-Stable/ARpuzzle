@@ -31,7 +31,7 @@ public class ImageMapper : MonoBehaviour
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
 
-        if (sceneName == "4PiecePuzzle")
+        if (sceneName == "4PiecePuzzle" || sceneName == "4PieceTabletop")
         {
             rows = 2;
             cols = 2;
@@ -72,7 +72,7 @@ public class ImageMapper : MonoBehaviour
             for (int j = 1; j <= cols; j++)
             {
                 puzzlePiecesImageMapper(i, j);
-                if (sceneName != "4PiecePuzzle")
+                if (sceneName != "4PiecePuzzle" || sceneName != "4PieceTabletop")
                 {
                     puzzleBoardImageMapper(i, j);
                 }
