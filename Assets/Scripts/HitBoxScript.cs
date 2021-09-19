@@ -69,6 +69,8 @@ Debug.Log(gameObject.name + " IS HITTING hitbox" + coll.name + " and " + hasPiec
                 coll.gameObject.GetComponent<PositionOnBoard>().greenHalo.enabled = false;
                 coll.gameObject.GetComponent<BoxCollider>().enabled = false;
 
+                FindObjectOfType<AudioManager>().Play("PlacePiece");
+
                 Debug.Log("Piece is dropped" + id);
             }
             else
