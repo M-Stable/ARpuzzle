@@ -31,6 +31,7 @@ public class EndOfGameController : MonoBehaviour
             timeSinceFinish += Time.deltaTime;
             if (timeSinceFinish > 3 && !played)
             {
+                FindObjectOfType<AudioManager>().Stop("Music");
                 video.gameObject.SetActive(true);
                 video.Play();
                 image.gameObject.SetActive(true);

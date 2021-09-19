@@ -74,18 +74,24 @@ public class PositionOnBoard : MonoBehaviour, IMixedRealityGestureHandler<Vector
         var action = eventData.MixedRealityInputAction.Description;
         if (action == "Hold Action")
         {
+            FindObjectOfType<AudioManager>().Play("PickupPiece");
+
             yellowHalo.enabled = true;
             isHeld = true;
             SetIndicator(HoldIndicator, "Hold: started", HoldMaterial);
         }
         else if (action == "Manipulate Action")
         {
+            FindObjectOfType<AudioManager>().Play("PickupPiece");
+
             yellowHalo.enabled = true;
             isHeld = true;
             SetIndicator(ManipulationIndicator, $"Manipulation: started {Vector3.zero}", ManipulationMaterial, Vector3.zero);
         }
         else if (action == "Navigation Action")
         {
+            FindObjectOfType<AudioManager>().Play("PickupPiece");
+
             yellowHalo.enabled = true;
             SetIndicator(NavigationIndicator, $"Navigation: started {Vector3.zero}", NavigationMaterial, Vector3.zero);
             ShowRails(Vector3.zero);
