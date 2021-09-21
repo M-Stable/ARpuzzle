@@ -9,8 +9,9 @@ using UnityEngine.SceneManagement;
 public class ImageMapper : MonoBehaviour
 {
     //public Material pieceImage;
-    public Material boardImage;
+    //public Material boardImage;
     public Texture2D pieceImage;
+    public Shader bwShader;
     private Renderer boardRend;
     public Vector2 direction = new Vector2(1, 0);
     public float speed = 1.0f;
@@ -42,12 +43,20 @@ public class ImageMapper : MonoBehaviour
             vectorOffset = -0.34f;
             offsetArray = new float[] { -0.47f, -0.94f };
 
-            GameObject piece = GameObject.Find("BoardImage");
+/*            GameObject piece = GameObject.Find("BoardImage");
             boardRend = piece.GetComponent<Renderer>();
             Material copy = boardImage;
 
             copy.mainTextureScale = new Vector2(1, 1);
-            boardRend.material = copy;
+            boardRend.material = copy;*/
+
+            GameObject piece = GameObject.Find("BoardImage");
+            boardRend = piece.GetComponent<Renderer>();
+
+            boardRend.material = new Material(bwShader);
+            boardRend.material.mainTexture = pieceImage;
+            boardRend.material.mainTextureScale = new Vector2(1, 1);
+
         }
         else if (sceneName == "SmallPuzzle")
         {
@@ -99,8 +108,8 @@ public class ImageMapper : MonoBehaviour
     {
         GameObject board = GameObject.Find("Board" + i + "," + j);
         Renderer rend = board.GetComponent<Renderer>();
-
-        rend.material = boardImage;
+        rend.material = new Material(bwShader);
+        rend.material.mainTexture = pieceImage;
         rend.material.mainTextureScale = new Vector2(puzzleScaleX, puzzleScaleY);
         rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
