@@ -8,8 +8,6 @@ using UnityEngine.SceneManagement;
  */
 public class ImageMapper : MonoBehaviour
 {
-    //public Material pieceImage;
-    //public Material boardImage;
     public Texture2D pieceImage;
     public Shader bwShader;
     private Renderer boardRend;
@@ -42,13 +40,6 @@ public class ImageMapper : MonoBehaviour
             offsetXToAdd = 0.47f;
             vectorOffset = -0.34f;
             offsetArray = new float[] { -0.47f, -0.94f };
-
-/*            GameObject piece = GameObject.Find("BoardImage");
-            boardRend = piece.GetComponent<Renderer>();
-            Material copy = boardImage;
-
-            copy.mainTextureScale = new Vector2(1, 1);
-            boardRend.material = copy;*/
 
             GameObject piece = GameObject.Find("BoardImage");
             boardRend = piece.GetComponent<Renderer>();
