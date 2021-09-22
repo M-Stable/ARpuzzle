@@ -18,7 +18,7 @@ public class FlockManager : MonoBehaviour
         Debug.Log(pieces.Length);
         if (pieces.Length == 12) {
             offsets = new Vector3[12];
-            Debug.Log("Gets here");
+            Debug.Log("Gets flocking for 12");
 
             offsets[0] = new Vector3(0, 0, 0);
             offsets[1] = new Vector3(0, -0.1f, -0.35f);
@@ -42,6 +42,15 @@ public class FlockManager : MonoBehaviour
             offsets[2] = new Vector3(0, 0.3f, 0.15f);
             offsets[3] = new Vector3(0, -0.25f, -0.25f);
         }
+        else if (pieces.Length == 2)
+        {
+            offsets = new Vector3[2];
+            Debug.Log("Gets flocking for 2");
+
+            offsets[0] = new Vector3(0, 0, 0);
+            offsets[1] = new Vector3(0, -0.1f, -0.35f);
+
+        }
         else {
             offsets = new Vector3[1];
             offsets[0] = new Vector3(0, 0, 0);
@@ -51,6 +60,7 @@ public class FlockManager : MonoBehaviour
         int index = 0;
 
         foreach (CurveFollow piece in pieces) {
+            Debug.Log(index + ", " + piece);
             piece.offset = offsets[index];
             piece.routes = routes;
             piece.speedModifier = speedModifier;

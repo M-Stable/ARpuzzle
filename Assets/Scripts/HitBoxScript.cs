@@ -13,7 +13,7 @@ public class HitBoxScript : MonoBehaviour
     public float PiecePositionY = 0;
     public float PiecePositionZ = 0;
     public int id = -1;
-    public EndOfGameController controller;
+    public TwoPieceEndController controller;
     private bool hasPieceBeenDropped = false;
     public static bool isInsideHitbox = false;
     public float offset = 0.075f;

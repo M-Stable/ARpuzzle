@@ -31,7 +31,24 @@ public class ImageMapper : MonoBehaviour
         // Retrieve the name of this scene.
         string sceneName = currentScene.name;
 
-        if (sceneName == "4PiecePuzzle" || sceneName == "4PieceTabletop")
+        if (sceneName == "2PieceTabletop")
+        {
+            rows = 1;
+            cols = 2;
+            puzzleScaleX = 3.5f;
+            puzzleScaleY = 3.5f;
+            offsetXToAdd = 0.47f;
+            vectorOffset = -0.34f;
+            offsetArray = new float[] { -0.47f, -0.94f };
+
+            GameObject piece = GameObject.Find("BoardImage");
+            boardRend = piece.GetComponent<Renderer>();
+            Material copy = boardImage;
+
+            copy.mainTextureScale = new Vector2(1, 1);
+            boardRend.material = copy;
+        }
+        else if (sceneName == "4PiecePuzzle" || sceneName == "4PieceTabletop")
         {
             rows = 2;
             cols = 2;
