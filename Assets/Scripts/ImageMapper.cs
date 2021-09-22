@@ -43,10 +43,10 @@ public class ImageMapper : MonoBehaviour
 
             GameObject piece = GameObject.Find("BoardImage");
             boardRend = piece.GetComponent<Renderer>();
-            Material copy = boardImage;
 
-            copy.mainTextureScale = new Vector2(1, 1);
-            boardRend.material = copy;
+            boardRend.material = new Material(bwShader);
+            boardRend.material.mainTexture = pieceImage;
+            boardRend.material.mainTextureScale = new Vector2(1, 1);
         }
         else if (sceneName == "4PiecePuzzle" || sceneName == "4PieceTabletop")
         {

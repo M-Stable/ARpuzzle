@@ -13,7 +13,8 @@ public class HitBoxScript : MonoBehaviour
     public float PiecePositionY = 0;
     public float PiecePositionZ = 0;
     public int id = -1;
-    public TwoPieceEndController controller;
+    public TwoPieceEndController twoController;
+    public EndOfGameController controller;
     private bool hasPieceBeenDropped = false;
     public static bool isInsideHitbox = false;
     public float offset = 0.075f;
@@ -64,7 +65,8 @@ Debug.Log(gameObject.name + " IS HITTING hitbox" + coll.name + " and " + hasPiec
                 finalPos.z -= offset;
                 coll.gameObject.transform.position = finalPos;
                 hasPieceBeenDropped = true;
-                controller.PuzzlePiecePlaced();
+                if (twoController) twoController.PuzzlePiecePlaced();
+                if (controller) controller.PuzzlePiecePlaced();
                 coll.gameObject.GetComponent<PositionOnBoard>().pieceInPlace = true;
                 coll.gameObject.GetComponent<PositionOnBoard>().greenHalo.enabled = false;
                 coll.gameObject.GetComponent<BoxCollider>().enabled = false;
