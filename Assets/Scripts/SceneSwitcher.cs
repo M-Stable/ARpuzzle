@@ -5,13 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
-    public void switchTo4()
+    public void switchTo2()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void switchToSmall()
+    public void switchTo4()
     {
         SceneManager.LoadScene(2);
+    }
+
+    public void switchToSmall()
+    {
+        SceneManager.LoadScene(3);
     }
 }
