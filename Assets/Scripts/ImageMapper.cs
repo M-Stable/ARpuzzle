@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
  */
 public class ImageMapper : MonoBehaviour
 {
-    public Material pieceImage;
-    public Material boardImage;
+    public Texture2D pieceImage;
+    public Shader bwShader;
     private Renderer boardRend;
     public Vector2 direction = new Vector2(1, 0);
     public float speed = 1.0f;
@@ -43,11 +43,13 @@ public class ImageMapper : MonoBehaviour
 
             GameObject piece = GameObject.Find("BoardImage");
             boardRend = piece.GetComponent<Renderer>();
-            Material copy = boardImage;
 
-            copy.mainTextureScale = new Vector2(1, 1);
-            boardRend.material = copy;
-        } else if (sceneName == "SmallPuzzle")
+            boardRend.material = new Material(bwShader);
+            boardRend.material.mainTexture = pieceImage;
+            boardRend.material.mainTextureScale = new Vector2(1, 1);
+
+        }
+        else if (sceneName == "SmallPuzzle")
         {
             rows = 3;
             cols = 4;
@@ -56,7 +58,8 @@ public class ImageMapper : MonoBehaviour
             offsetXToAdd = 0.24f;
             offsetArray = new float[] { -0.25f, -0.49f, -0.73f };
             vectorOffset = -1.2f;
-        } else
+        }
+        else
         {
             rows = 5;
             cols = 6;
@@ -85,7 +88,9 @@ public class ImageMapper : MonoBehaviour
         GameObject piece = GameObject.Find(i + "," + j);
         Renderer rend = piece.GetComponent<Renderer>();
 
-        rend.material = pieceImage;
+        rend.material = new Material(Shader.Find("Unlit/Texture"));
+        rend.material.mainTexture = pieceImage;
+
         rend.material.mainTextureScale = new Vector2(puzzleScaleX, puzzleScaleY);
         rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
@@ -94,8 +99,8 @@ public class ImageMapper : MonoBehaviour
     {
         GameObject board = GameObject.Find("Board" + i + "," + j);
         Renderer rend = board.GetComponent<Renderer>();
-
-        rend.material = boardImage;
+        rend.material = new Material(bwShader);
+        rend.material.mainTexture = pieceImage;
         rend.material.mainTextureScale = new Vector2(puzzleScaleX, puzzleScaleY);
         rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
