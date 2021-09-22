@@ -20,10 +20,14 @@ public class TwoPieceEndController : MonoBehaviour
     {
         if (placedPuzzlePieces >= numPuzzlePieces)
         {
+            FindObjectOfType<AudioManager>().Stop("Music");
+
+
             timeSinceFinish += Time.deltaTime;
-            if (timeSinceFinish > 3 && !played && numPuzzlePieces != 2)
+            if (timeSinceFinish > 1 && !played)
             {
-                FindObjectOfType<AudioManager>().Stop("Music");
+                FindObjectOfType<AudioManager>().Play("Finished");
+
                 played = true;
             }
         }
