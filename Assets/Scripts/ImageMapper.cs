@@ -66,7 +66,7 @@ public class ImageMapper : MonoBehaviour
             boardRend.material.mainTextureScale = new Vector2(1, 1);
 
         }
-        else if (sceneName == "SmallPuzzle")
+        else if (sceneName == "SmallPuzzle" || sceneName == "12PieceSlanted")
         {
             rows = 3;
             cols = 4;
