@@ -40,7 +40,6 @@ public class EndOfGameController : MonoBehaviour
 
             if (timeSinceFinish > 1 && !played)
             {
-                FindObjectOfType<AudioManager>().Play("Finished");
                 if (isVideo)
                 {
                     video.gameObject.SetActive(true);
@@ -48,6 +47,7 @@ public class EndOfGameController : MonoBehaviour
                     image.gameObject.SetActive(true);
                 } else
                 {
+                    FindObjectOfType<AudioManager>().Play("Finished");
                     StartCoroutine(WaitForSound());
                 }
                 played = true;
