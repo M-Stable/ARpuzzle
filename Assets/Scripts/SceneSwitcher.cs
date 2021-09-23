@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneSwitcher : MonoBehaviour
 {
+    public void switchToMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void switchTo2()
     {
         SceneManager.LoadScene(1);

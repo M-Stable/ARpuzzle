@@ -1,13 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class EndOfGameController : MonoBehaviour
 {
     public int numPuzzlePieces;
+    public bool isVideo;
     private int placedPuzzlePieces = 0;
     private float timeSinceFinish = 0;
     private bool played = false;
+
 
     public CountdownTimer timer;
     public UnityEngine.Video.VideoPlayer video;
@@ -16,10 +19,13 @@ public class EndOfGameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        video.gameObject.SetActive(false);
-        image.gameObject.SetActive(false);
-        video.frame = 0;
-        video.loopPointReached += EndReached;
+        if (isVideo)
+        {
+            video.gameObject.SetActive(false);
+            image.gameObject.SetActive(false);
+            video.frame = 0;
+            video.loopPointReached += EndReached;
+        }
     }
 
     // Update is called once per frame
@@ -27,18 +33,27 @@ public class EndOfGameController : MonoBehaviour
     {
         if (placedPuzzlePieces >= numPuzzlePieces)
         {
-            timer.IndicateGameFinished();
+            FindObjectOfType<AudioManager>().Pause("Music");
+            if (timer) timer.IndicateGameFinished();
+            
             timeSinceFinish += Time.deltaTime;
-            if (timeSinceFinish > 3 && !played)
+
+            if (timeSinceFinish > 1 && !played)
             {
-                FindObjectOfType<AudioManager>().Stop("Music");
-                video.gameObject.SetActive(true);
-                video.Play();
-                image.gameObject.SetActive(true);
+                if (isVideo)
+                {
+                    video.gameObject.SetActive(true);
+                    video.Play();
+                    image.gameObject.SetActive(true);
+                } else
+                {
+                    FindObjectOfType<AudioManager>().Play("Finished");
+                    StartCoroutine(WaitForSound());
+                }
                 played = true;
             }
 
-            if (timeSinceFinish > 5 && video.frame < 10)
+            if (isVideo == true && timeSinceFinish > 5 && video.frame < 10)
             {
                 video.Stop();
             } 
@@ -48,11 +63,19 @@ public class EndOfGameController : MonoBehaviour
     public void PuzzlePiecePlaced()
     {
         placedPuzzlePieces++;
-        Debug.Log(placedPuzzlePieces);
     }
 
     public void EndReached(UnityEngine.Video.VideoPlayer vp)
     {
         vp.SetDirectAudioVolume(0, 0);
+    }
+
+    public IEnumerator WaitForSound()
+    {
+        yield return new WaitUntil(() => FindObjectOfType<AudioManager>().getSound("Finished").source.isPlaying == false);
+
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        FindObjectOfType<AudioManager>().Play("Music");
     }
 }
