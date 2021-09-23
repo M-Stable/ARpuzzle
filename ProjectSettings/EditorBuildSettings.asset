@@ -69,6 +69,9 @@ EditorBuildSettings:
     path: Assets/Scenes/4PieceTabletop.unity
     guid: 6fa63d36c6281764b83d879a37f9545a
   - enabled: 1
+    path: Assets/Scenes/12PieceSlanted.unity
+    guid: 5335ebfda65043c4b915811fe5ce1537
+  - enabled: 0
     path: Assets/Scenes/SmallPuzzle.unity
     guid: 24be1f21a06100348bae3251a04e7368
   m_configObjects: {}
