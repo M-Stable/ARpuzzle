@@ -35,11 +35,16 @@ public class ImageMapper : MonoBehaviour
         {
             rows = 1;
             cols = 2;
-            puzzleScaleX = 3.5f;
-            puzzleScaleY = 3.5f;
-            offsetXToAdd = 0.47f;
-            vectorOffset = -0.34f;
-            offsetArray = new float[] { -0.47f, -0.94f };
+            puzzleScaleX = 1.9f; //1.9
+            puzzleScaleY = 4f; //3.8
+            offsetXToAdd = -0.52f; //-1.167f
+            vectorOffset = -1.2f;
+            offsetArray = new float[] { -3f };
+
+            GameObject piece1 = GameObject.Find("1,1");
+            GameObject piece2 = GameObject.Find("1,2");
+            piece1.transform.localRotation = Quaternion.identity;
+            piece2.transform.localRotation = Quaternion.identity;
 
             GameObject piece = GameObject.Find("BoardImage");
             boardRend = piece.GetComponent<Renderer>();
@@ -104,7 +109,7 @@ public class ImageMapper : MonoBehaviour
     {
         GameObject piece = GameObject.Find(i + "," + j);
         Renderer rend = piece.GetComponent<Renderer>();
-
+        
         rend.material = new Material(Shader.Find("Unlit/Texture"));
         rend.material.mainTexture = pieceImage;
 
@@ -122,3 +127,4 @@ public class ImageMapper : MonoBehaviour
         rend.material.mainTextureOffset = new Vector2(vectorOffset + ((j - 1) * offsetXToAdd), offsetArray[i - 1]);
     }
 }
+
