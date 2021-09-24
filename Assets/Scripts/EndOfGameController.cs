@@ -33,7 +33,7 @@ public class EndOfGameController : MonoBehaviour
     {
         if (placedPuzzlePieces >= numPuzzlePieces)
         {
-            FindObjectOfType<AudioManager>().Pause("Music");
+            FindObjectOfType<AudioManager>().levelMusic[getSceneIndex()].source.Pause();
             if (timer) timer.IndicateGameFinished();
             
             timeSinceFinish += Time.deltaTime;
@@ -74,8 +74,13 @@ public class EndOfGameController : MonoBehaviour
     {
         yield return new WaitUntil(() => FindObjectOfType<AudioManager>().getSound("Finished").source.isPlaying == false);
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(getSceneIndex() + 1);
 
-        FindObjectOfType<AudioManager>().Play("Music");
+        FindObjectOfType<AudioManager>().levelMusic[getSceneIndex() + 1].source.Play();
+    }
+
+    public int getSceneIndex()
+    {
+        return SceneManager.GetActiveScene().buildIndex;
     }
 }

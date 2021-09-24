@@ -68,3 +68,28 @@ MonoBehaviour:
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  levelMusic:
+  - name: Menu
+    clip: {fileID: 8300000, guid: 6a3faa12e53d7074babbe03b4680a4cc, type: 3}
+    volume: 0.217
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Level1
+    clip: {fileID: 8300000, guid: 6a3faa12e53d7074babbe03b4680a4cc, type: 3}
+    volume: 0.217
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Level2
+    clip: {fileID: 8300000, guid: 512a78217cc69d440a5263d4641e5c0d, type: 3}
+    volume: 0.217
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
+  - name: Level3
+    clip: {fileID: 8300000, guid: 8eab540ebd1aed04b9a90ede6a95a525, type: 3}
+    volume: 0.217
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}

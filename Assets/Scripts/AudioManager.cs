@@ -1,11 +1,14 @@
 ﻿using UnityEngine.Audio;
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class AudioManager : MonoBehaviour
 {
 
     public Sound[] sounds;
+    public Sound[] levelMusic;
     public static AudioManager instance;
 
     void Awake()
@@ -24,18 +27,29 @@ public class AudioManager : MonoBehaviour
 
         foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.clip;
-
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
+            setSounds(s);
         }
+
+        foreach (Sound s in levelMusic)
+        {
+            setSounds(s);
+        }
+    }
+
+    void setSounds(Sound s)
+    {
+        s.source = gameObject.AddComponent<AudioSource>();
+        s.source.clip = s.clip;
+
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+        s.source.loop = s.loop;
     }
 
     void Start()
     {
-        Play("Music");
+        //Play("Music");
+        levelMusic[SceneManager.GetActiveScene().buildIndex].source.Play();
     }
 
     public void Play(string name)
@@ -66,5 +80,14 @@ public class AudioManager : MonoBehaviour
         Sound s = Array.Find(sounds, sound => sound.name == name);
 
         return s;
+    }
+
+    public void stopAll()
+    {
+        foreach (Sound s in levelMusic)
+        {
+            s.source.Stop();
+        }
+
     }
 }
