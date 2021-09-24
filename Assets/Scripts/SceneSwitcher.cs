@@ -7,29 +7,28 @@ public class SceneSwitcher : MonoBehaviour
 {
     public void switchToMenu()
     {
-        FindObjectOfType<AudioManager>().stopAll();
-        SceneManager.LoadScene(0);
-        FindObjectOfType<AudioManager>().levelMusic[0].source.Play();
+        switchScene(0);
     }
 
     public void switchTo2()
     {
-        FindObjectOfType<AudioManager>().stopAll();
-        SceneManager.LoadScene(1);
-        FindObjectOfType<AudioManager>().levelMusic[1].source.Play();
+        switchScene(1);
     }
 
     public void switchTo4()
     {
-        FindObjectOfType<AudioManager>().stopAll();
-        SceneManager.LoadScene(2);
-        FindObjectOfType<AudioManager>().levelMusic[2].source.Play();
+        switchScene(2);
     }
 
     public void switchToSmall()
     {
+        switchScene(3);
+    }
+
+    private void switchScene(int i)
+    {
         FindObjectOfType<AudioManager>().stopAll();
-        SceneManager.LoadScene(3);
-        FindObjectOfType<AudioManager>().levelMusic[3].source.Play();
+        SceneManager.LoadScene(i);
+        FindObjectOfType<AudioManager>().levelMusic[i].source.Play();
     }
 }
